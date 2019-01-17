@@ -4,7 +4,9 @@
     <EndDay v-if="$store.getters.authenticated"/>
     <div class="row">
       <div class="col-md-12">
-        <router-view/>
+        <transition name="slide" mode="out-in">
+          <router-view/>
+        </transition>
       </div>
     </div>
   </div>
@@ -57,4 +59,37 @@ body {
 .bg-light li.active a {
   color: #000 !important;
 }
+.slide-leave-active {
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  animation: slide-out 0.5s ease-out forwards;
+}
+
+.slide-leave {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-enter-active {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+@keyframes slide-out {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-30px);
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-30px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 </style>
+
